@@ -111,3 +111,10 @@ p {
 span {
   color: #2bd6b4;
 }
+
+.textor {
+  margin: 6rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 3rem;
+  text-shadow: 0 0 15px black;
+}

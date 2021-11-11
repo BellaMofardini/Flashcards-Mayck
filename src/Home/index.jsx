@@ -7,6 +7,7 @@ function Home() {
     <>
       <Navbar> </Navbar>
       <h1> HOME </h1>
+      <bold className="textor">SEJA BEM-VINDO A HOME</bold>
     </>
   );
 }
