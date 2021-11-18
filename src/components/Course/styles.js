@@ -17,4 +17,23 @@ export const Container = styled.div`
     filter: brightness(0.85);
     transform: scale(1.05);
   }
+
+  .buttonsContainer {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: left;
+
+    button {
+      background: transparent;
+      border: 0;
+      color: rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: 100ms ease;
+
+      &:hover {
+        color: rgba(255, 255, 255, 1);
+      }
+    }
+  }
 `;

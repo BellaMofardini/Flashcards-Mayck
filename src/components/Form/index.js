@@ -1,18 +1,50 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import { Container } from "./styles";
 import axios from "axios";
 
-const Form = () => {
+const Form = ({ edit, id }) => {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
   const [privacy, setPrivacy] = useState(false);
 
   const history = useHistory();
 
+  function pegarDadosEFiltrar() {
+    axios
+      .get("https://flashcard-api-mayck.herokuapp.com/api/colecoes")
+      .then(({ data }) => {
+        const course = data.filter((c) => {
+          return (c.colecaoId = id);
+        });
+
+        setName(course[0].nome);
+        setDesc(course[0].descricao);
+        setPrivacy(course[0].publico);
+      });
+  }
+
+  useEffect(() => {
+    edit && pegarDadosEFiltrar();
+  }, []);
+
   function submit(e) {
     e.preventDefault();
+
+    if (edit) {
+      axios
+        .put(`https://flashcard-api-mayck.herokuapp.com/api/colecoes/${id}`, {
+          nome: name,
+          descricao: desc,
+          publico: privacy,
+        })
+        .finally(() => {
+          history.push("/courses");
+        });
+      return;
+    }
+
     axios
       .post("https://flashcard-api-mayck.herokuapp.com/api/colecoes", {
         nome: name,
@@ -73,7 +105,11 @@ const Form = () => {
         value="Cancel"
         onClick={cancel}
       />
-      <input className="sendButton" type="submit" value="Add" />
+      <input
+        className="sendButton"
+        type="submit"
+        value={edit ? "Save" : "Add"}
+      />
     </Container>
   );
 };
