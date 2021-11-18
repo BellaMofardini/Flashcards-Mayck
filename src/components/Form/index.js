@@ -19,9 +19,9 @@ const Form = ({ edit, id }) => {
           return (c.colecaoId = id);
         });
 
-        setName(course[0].nome);
-        setDesc(course[0].descricao);
-        setPrivacy(course[0].publico);
+        setName(course[0]?.nome);
+        setDesc(course[0]?.descricao);
+        setPrivacy(course[0]?.publico);
       });
   }
 
