@@ -13,15 +13,11 @@ const Form = ({ edit, id }) => {
 
   function pegarDadosEFiltrar() {
     axios
-      .get("https://flashcard-api-mayck.herokuapp.com/api/colecoes")
+      .get(`https://flashcard-api-mayck.herokuapp.com/api/colecoes/${id}`)
       .then(({ data }) => {
-        const course = data.filter((c) => {
-          return (c.colecaoId = id);
-        });
-
-        setName(course[0]?.nome);
-        setDesc(course[0]?.descricao);
-        setPrivacy(course[0]?.publico);
+        setName(data.nome);
+        setDesc(data.descricao);
+        setPrivacy(data.publico);
       });
   }
 
